@@ -1,0 +1,162 @@
+---
+import { FORMULAR_ENDPOINT } from '../config';
+---
+
+<section id="kontakt" class="bg-primarni-tmava px-4 py-16 text-white md:px-8 md:py-24">
+  <div class="mx-auto max-w-2xl text-center">
+    <h2 class="text-3xl text-white md:text-4xl">Udělejte ten první krok pro sebe ještě dnes</h2>
+    <p class="mt-4 text-base text-white/85 md:text-lg">
+      Nebuďte na to sami. Napište mi a domluvíme si 1. sezení, zdarma a nezávazně. Ozvu se vám co nejdřív.
+    </p>
+  </div>
+
+  <div class="mx-auto mt-10 max-w-xl rounded-2xl bg-podklad p-6 shadow-lg md:p-8">
+    {!FORMULAR_ENDPOINT && (
+      <p class="mb-4 rounded-xl bg-akcent/10 p-3 text-sm text-akcent-tmava">
+        Formulář zatím není napojený na žádnou službu. Doplň <code>FORMULAR_ENDPOINT</code> v <code>src/config.ts</code>.
+      </p>
+    )}
+
+    <form id="kontaktni-formular" data-endpoint={FORMULAR_ENDPOINT} class="space-y-4" novalidate>
+      <div>
+        <label for="jmeno" class="mb-1 block text-sm font-medium text-text">Jméno *</label>
+        <input
+          type="text"
+          id="jmeno"
+          name="jmeno"
+          required
+          autocomplete="name"
+          class="w-full rounded-xl border border-linka bg-bila px-4 py-3 text-text focus:border-primarni focus:outline-none"
+        />
+      </div>
+
+      <div>
+        <label for="email" class="mb-1 block text-sm font-medium text-text">E-mail *</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          required
+          autocomplete="email"
+          class="w-full rounded-xl border border-linka bg-bila px-4 py-3 text-text focus:border-primarni focus:outline-none"
+        />
+      </div>
+
+      <div>
+        <label for="telefon" class="mb-1 block text-sm font-medium text-text">Telefon</label>
+        <input
+          type="tel"
+          id="telefon"
+          name="telefon"
+          autocomplete="tel"
+          class="w-full rounded-xl border border-linka bg-bila px-4 py-3 text-text focus:border-primarni focus:outline-none"
+        />
+      </div>
+
+      <div>
+        <label for="zprava" class="mb-1 block text-sm font-medium text-text">Co byste chtěli řešit?</label>
+        <textarea
+          id="zprava"
+          name="zprava"
+          rows="4"
+          class="w-full rounded-xl border border-linka bg-bila px-4 py-3 text-text focus:border-primarni focus:outline-none"
+        ></textarea>
+      </div>
+
+      <!-- honeypot proti spamu -->
+      <div class="hidden" aria-hidden="true">
+        <label for="predmet-webu">Nevyplňujte toto pole</label>
+        <input type="text" id="predmet-webu" name="predmet-webu" tabindex="-1" autocomplete="off" />
+      </div>
+
+      <label class="flex items-start gap-3 text-sm text-text-svetla">
+        <input
+          type="checkbox"
+          id="souhlas"
+          name="souhlas"
+          required
+          class="mt-1 h-4 w-4 shrink-0 rounded border-linka text-primarni focus:ring-primarni"
+        />
+        <span>
+          Souhlasím se zpracováním osobních údajů podle
+          <a href="/ochrana-osobnich-udaju" class="underline decoration-linka underline-offset-2 hover:text-primarni-tmava">Ochrany osobních údajů</a>. *
+        </span>
+      </label>
+
+      <p id="formular-chyba" class="hidden text-sm font-medium text-red-600" role="alert"></p>
+
+      <button type="submit" class="btn-cta w-full">
+        Odeslat a domluvit 1. sezení zdarma
+      </button>
+    </form>
+
+    <p id="formular-diky" class="hidden text-center text-lg font-medium text-primarni-tmava" role="status">
+      Děkuji, ozvu se vám co nejdřív.
+    </p>
+  </div>
+</section>
+
+<script is:inline>
+  (function () {
+    var form = document.getElementById('kontaktni-formular');
+    if (!form) return;
+
+    var chybaEl = document.getElementById('formular-chyba');
+    var dikyEl = document.getElementById('formular-diky');
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      chybaEl.classList.add('hidden');
+      chybaEl.textContent = '';
+
+      var jmeno = form.jmeno.value.trim();
+      var email = form.email.value.trim();
+      var souhlas = form.souhlas.checked;
+      var honeypot = form['predmet-webu'].value;
+      var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+      if (honeypot) return; // spam bot
+
+      if (!jmeno || !email || !souhlas) {
+        chybaEl.textContent = 'Vyplňte prosím jméno, e-mail a odsouhlaste zpracování osobních údajů.';
+        chybaEl.classList.remove('hidden');
+        return;
+      }
+
+      if (!emailRegex.test(email)) {
+        chybaEl.textContent = 'Zadejte prosím platnou e-mailovou adresu.';
+        chybaEl.classList.remove('hidden');
+        return;
+      }
+
+      var endpoint = form.dataset.endpoint;
+      if (!endpoint) {
+        chybaEl.textContent = 'Formulář zatím není napojený na žádnou službu. Napište prosím přímo na e-mail v patičce.';
+        chybaEl.classList.remove('hidden');
+        return;
+      }
+
+      var submitBtn = form.querySelector('button[type="submit"]');
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Odesílám…';
+
+      fetch(endpoint, {
+        method: 'POST',
+        headers: { Accept: 'application/json' },
+        body: new FormData(form),
+      })
+        .then(function (res) {
+          if (!res.ok) throw new Error('Odeslání selhalo');
+          form.classList.add('hidden');
+          dikyEl.classList.remove('hidden');
+          if (window.fbq) window.fbq('track', 'Lead');
+        })
+        .catch(function () {
+          chybaEl.textContent = 'Něco se nepovedlo. Zkuste to prosím znovu, nebo napište přímo na e-mail v patičce.';
+          chybaEl.classList.remove('hidden');
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Odeslat a domluvit 1. sezení zdarma';
+        });
+    });
+  })();
+</script>

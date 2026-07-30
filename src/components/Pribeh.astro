@@ -1,0 +1,44 @@
+---
+import { Image } from 'astro:assets';
+import { CTA_HREF } from '../config';
+import pribehPriroda from '../assets/images/pribeh-priroda.jpg';
+---
+
+<section id="pribeh" class="bg-podklad px-4 py-16 md:px-8 md:py-24">
+  <div class="mx-auto grid max-w-6xl gap-10 md:grid-cols-2 md:items-center md:gap-14">
+    <Image
+      src={pribehPriroda}
+      alt="Lesní cesta v ranním světle jako metafora nového začátku"
+      widths={[450, 700, 900]}
+      sizes="(min-width: 768px) 45vw, 90vw"
+      format="webp"
+      quality={80}
+      loading="lazy"
+      class="aspect-4/3 w-full rounded-2xl object-cover shadow-lg md:order-last"
+    />
+
+    <div>
+      <h2 class="text-3xl md:text-4xl">Prošla jsem si tím taky</h2>
+      <div class="prose-p mt-5 space-y-4">
+        <p>
+          Měla jsem dravou kariéru na obrazovkách TV Nova a Prima, a přitom život v neustálém stresu
+          a tlaku na výkon. Myslela jsem, že na mateřské si odpočinu. Místo toho přišly dvě nespící
+          děti, izolace během covidu, vyčerpání a tiché vyhoření z mateřství. Úplně jsem zapomněla na sebe.
+        </p>
+        <p>
+          Zlom přišel, když jsem si uvědomila, že musím zachránit sama sebe. Přes mindfulness, meditaci
+          a roky práce na sobě jsem našla cestu zpátky, a nakonec i koučink, který mi vrátil sebevědomí
+          a smysl.
+        </p>
+        <p>
+          Dnes jsem tu jako certifikovaná koučka pro vás. Nabízím bezpečné místo, kde nemusíte být
+          dokonalí, kde můžete odložit masky a kde vás nikdo nesoudí.
+        </p>
+      </div>
+
+      <a href={CTA_HREF} class="btn-cta mt-8">
+        <span aria-hidden="true">☑</span> Rezervovat 1. sezení zdarma
+      </a>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,45 @@
+---
+import { Image } from 'astro:assets';
+import oMne from '../assets/images/o-mne.jpg';
+
+const odznaky = [
+  'Certifikovaná transformační koučka (CTK), Coaching University',
+  'Ing., VŠE Praha (Marketing a cestovní ruch), studia v Kanadě a USA',
+  '10+ let samostudia psychologie dětí i dospělých',
+  'Výcviky Mindfulness a facilitace kruhové komunikace',
+  'Zkušenost z médií a krizové komunikace (TV Nova, FTV Prima)',
+];
+---
+
+<section class="bg-podklad px-4 py-16 md:px-8 md:py-24">
+  <div class="mx-auto grid max-w-6xl gap-10 md:grid-cols-2 md:items-center md:gap-14">
+    <Image
+      src={oMne}
+      alt="Transformační koučka Lucie Linhartová"
+      widths={[400, 600, 800]}
+      sizes="(min-width: 768px) 35vw, 90vw"
+      format="webp"
+      quality={80}
+      loading="lazy"
+      class="aspect-square w-full max-w-md rounded-2xl object-cover shadow-lg md:mx-auto"
+    />
+
+    <div>
+      <h2 class="text-3xl md:text-4xl">Kdo vás bude provázet</h2>
+      <p class="prose-p mt-5">
+        Jsem Lucie a věřím, že i uprostřed shonu rodičovství a kariéry se dá najít cesta zpátky k sobě.
+        Kombinuji vzdělání, roky vlastní praxe i osobní zkušenost s vyhořením, abych vám nabídla bezpečný
+        prostor bez soudů a s jasným směrem.
+      </p>
+
+      <ul class="mt-6 space-y-3">
+        {odznaky.map((o) => (
+          <li class="flex items-start gap-3 text-sm text-text md:text-base">
+            <span class="mt-1 shrink-0 text-primarni" aria-hidden="true">✓</span>
+            <span>{o}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</section>

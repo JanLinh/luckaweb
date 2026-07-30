@@ -1,0 +1,30 @@
+---
+const reference = [
+  {
+    jmeno: 'Eliška Tichá',
+    text: 'Lucka dokáže vytvořit příjemný a bezpečný prostor pro otevřené sdílení. Díky jejím citlivě kladeným otázkám a empatickému přístupu jsem si lépe utřídila myšlenky a získala větší jistotu, jak dál. Spolupráci ráda doporučuji.',
+  },
+  {
+    jmeno: 'Barbora Svobodová',
+    text: 'Přišla jsem v době, kdy jsem po rodičovské vůbec nevěděla, jak dál. Chaos v hlavě a žádné sebevědomí. Lucka mě dokázala neuvěřitelně nakopnout. Její otázky míří přesně k jádru věci. Z každého sezení odcházím s jasným plánem a energií. Všemi deseti doporučuji!',
+  },
+];
+---
+
+<section class="bg-karta px-4 py-16 md:px-8 md:py-24">
+  <div class="mx-auto max-w-3xl text-center">
+    <h2 class="text-3xl md:text-4xl">Co říkají klientky</h2>
+  </div>
+
+  <div class="mx-auto mt-10 grid max-w-4xl gap-6 md:grid-cols-2">
+    {reference.map((r) => (
+      <figure class="rounded-2xl bg-bila p-6 shadow-sm">
+        <div class="text-akcent" aria-hidden="true">★★★★★</div>
+        <blockquote class="prose-p mt-3 text-text">
+          „{r.text}“
+        </blockquote>
+        <figcaption class="mt-4 text-sm font-semibold text-primarni-tmava">{r.jmeno}</figcaption>
+      </figure>
+    ))}
+  </div>
+</section>

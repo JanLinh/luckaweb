@@ -1,0 +1,30 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { EMAIL, TELEFON } from '../config';
+---
+
+<Layout title="Ochrana osobních údajů | Lucie Linhartová" description="Informace o zpracování osobních údajů na webu Lucie Linhartové.">
+  <main class="mx-auto max-w-3xl px-4 py-16 md:px-8 md:py-24">
+    <h1 class="text-3xl md:text-4xl">Ochrana osobních údajů</h1>
+
+    <div class="prose-p mt-6 space-y-4 max-w-none">
+      <p>
+        Správcem osobních údajů je Lucie Linhartová, kontakt: <a href={`mailto:${EMAIL}`} class="underline">{EMAIL}</a>,
+        {TELEFON}.
+      </p>
+      <p>
+        Údaje vyplněné v kontaktním formuláři (jméno, e-mail, telefon, obsah zprávy) používám výhradně
+        za účelem domluvení a poskytnutí koučovacích služeb. Údaje nepředávám třetím stranám kromě
+        technického zpracovatele formuláře a nepoužívám je k ničemu jinému.
+      </p>
+      <p>
+        Tento web používá Meta Pixel pro měření účinnosti reklamních kampaní, pouze po udělení
+        souhlasu v cookie liště. Souhlas můžete kdykoliv odvolat vymazáním dat prohlížeče pro tuto stránku.
+      </p>
+      <p>
+        Máte právo na přístup ke svým údajům, jejich opravu, výmaz nebo omezení zpracování. V případě
+        dotazů mě kontaktujte na uvedeném e-mailu.
+      </p>
+    </div>
+  </main>
+</Layout>

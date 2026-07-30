@@ -1,0 +1,39 @@
+---
+import { CTA_HREF } from '../config';
+
+const oblasti = [
+  { cislo: '01', nazev: 'Rodinné a pracovní vztahy', vysledek: 'Pevné hranice bez pocitů viny.' },
+  { cislo: '02', nazev: 'Strachy, obavy a úzkosti', vysledek: 'Proměňte strach ze selhání v sílu.' },
+  { cislo: '03', nazev: 'Kariéra a uplatnění', vysledek: 'Restart po rodičovské a nová cesta, která dává smysl.' },
+  { cislo: '04', nazev: 'Naplnění a smysl', vysledek: 'Najděte směr, kdo jste, když zrovna nepečujete o druhé.' },
+  { cislo: '05', nazev: 'Emoce a psychická stabilita', vysledek: 'Reagujte s klidem, ne v emocích.' },
+  { cislo: '06', nazev: 'Zdraví, únava a energie', vysledek: 'Stopka pro vyhoření a návrat energie.' },
+  { cislo: '07', nazev: 'Priority a cíle', vysledek: 'Ukliďte chaos v hlavě a vraťte se ke svým snům.' },
+  { cislo: '08', nazev: 'Vztah k sobě a sebedůvěra', vysledek: 'Utište vnitřního kritika a vraťte se ke svým potřebám.' },
+];
+---
+
+<section class="bg-karta px-4 py-16 md:px-8 md:py-24">
+  <div class="mx-auto max-w-3xl text-center">
+    <h2 class="text-3xl md:text-4xl">Oblasti, ve kterých vás provedu</h2>
+  </div>
+
+  <div class="mx-auto mt-10 grid max-w-6xl gap-5 sm:grid-cols-2 lg:grid-cols-4">
+    {oblasti.map((o) => (
+      <div class="rounded-2xl bg-bila p-6 shadow-sm">
+        <span class="font-display text-2xl text-linka">{o.cislo}</span>
+        <h3 class="mt-2 text-lg text-primarni-tmava">{o.nazev}</h3>
+        <p class="mt-2 text-sm text-text-svetla">{o.vysledek}</p>
+      </div>
+    ))}
+  </div>
+
+  <div class="mx-auto mt-10 max-w-2xl text-center">
+    <p class="mb-5 text-lg font-medium text-primarni-tmava">
+      Vidíte se v něčem z toho? Pojďme si domluvit 1. sezení, nezávazně a zdarma.
+    </p>
+    <a href={CTA_HREF} class="btn-cta">
+      <span aria-hidden="true">☑</span> Rezervovat 1. sezení zdarma
+    </a>
+  </div>
+</section>

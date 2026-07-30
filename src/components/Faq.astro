@@ -1,0 +1,69 @@
+---
+const balicky = [
+  { nazev: 'Jednotlivé sezení', cena: '1 900 Kč', poznamka: '', doporuceno: false },
+  { nazev: 'Balíček „Restart“', pocet: '5 sezení', cena: '8 500 Kč', poznamka: '1 700 Kč/sezení, ušetříte 1 000 Kč', doporuceno: false },
+  { nazev: 'Balíček „Proměna“', pocet: '10 sezení', cena: '15 000 Kč', poznamka: '1 500 Kč/sezení, ušetříte 4 000 Kč', doporuceno: true },
+];
+
+const otazky = [
+  {
+    q: 'Je koučink to samé co terapie?',
+    a: 'Ne. Terapie se často vrací do minulosti a k ranám; koučink se dívá dopředu: kam chcete dojít a jak. Pracujeme s tím, co můžete ovlivnit teď.',
+  },
+  {
+    q: 'Jak sezení probíhá?',
+    a: 'Osobně v Praze a okolí, nebo online přes Zoom odkudkoliv. Vy si vyberete, co vám vyhovuje.',
+  },
+  {
+    q: 'Kolik sezení budu potřebovat?',
+    a: 'To je individuální. První je zdarma a nezávazné, na něm zjistíme, co dává smysl.',
+  },
+  {
+    q: 'Kolik to stojí?',
+    a: 'První sezení je vždy zdarma a nezávazné, nejdřív se poznáme. Pro další spolupráci si můžete vybrat z balíčků (koučink dává největší smysl v sérii, ne jednorázově). Který balíček je pro vás ten pravý, v klidu vybereme na prvním sezení podle toho, co potřebujete.',
+    balicky: true,
+  },
+  {
+    q: 'Je to opravdu nezávazné?',
+    a: 'Ano. Nejdřív se poznáme, žádný závazek předem.',
+  },
+  {
+    q: 'Pro koho je to vhodné?',
+    a: 'Hlavně pro rodiče, kteří se cítí vyčerpaní, ztratili sami sebe nebo hledají nový směr. Ale přijít může kdokoliv na životní křižovatce.',
+  },
+];
+---
+
+<section class="bg-karta px-4 py-16 md:px-8 md:py-24">
+  <div class="mx-auto max-w-3xl text-center">
+    <h2 class="text-3xl md:text-4xl">Časté otázky</h2>
+  </div>
+
+  <div class="mx-auto mt-10 max-w-3xl divide-y divide-linka rounded-2xl bg-bila shadow-sm">
+    {otazky.map((item) => (
+      <details class="group px-6 py-5">
+        <summary class="flex cursor-pointer list-none items-center justify-between gap-4 font-medium text-primarni-tmava marker:content-none">
+          {item.q}
+          <span class="shrink-0 text-xl text-primarni transition-transform group-open:rotate-45" aria-hidden="true">+</span>
+        </summary>
+        <p class="prose-p mt-3">{item.a}</p>
+
+        {item.balicky && (
+          <div class="mt-5 grid gap-4 sm:grid-cols-3">
+            {balicky.map((b) => (
+              <div class={`rounded-2xl border p-5 ${b.doporuceno ? 'border-akcent bg-akcent/5' : 'border-linka bg-podklad'}`}>
+                {b.doporuceno && (
+                  <span class="mb-2 inline-block rounded-full bg-akcent px-3 py-1 text-xs font-semibold text-white">Doporučeno</span>
+                )}
+                <p class="font-display text-lg text-primarni-tmava">{b.nazev}</p>
+                {b.pocet && <p class="text-sm text-text-svetla">{b.pocet}</p>}
+                <p class="mt-2 text-2xl font-semibold text-text">{b.cena}</p>
+                {b.poznamka && <p class="mt-1 text-xs text-text-svetla">{b.poznamka}</p>}
+              </div>
+            ))}
+          </div>
+        )}
+      </details>
+    ))}
+  </div>
+</section>

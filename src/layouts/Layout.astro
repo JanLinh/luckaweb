@@ -1,0 +1,101 @@
+---
+import '../styles/global.css';
+import { META_PIXEL_ID, TELEFON, EMAIL } from '../config';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'Lucie Linhartová | Transformační koučka Praha | 1. sezení zdarma',
+  description = 'Provázím unavené rodiče na kariérní křižovatce. Najděte znovu energii, hranice a směr. První sezení zdarma a nezávazně, online i osobně v Praze.',
+} = Astro.props;
+
+const siteUrl = Astro.site?.toString() ?? 'https://lucielinhartova.cz';
+const ogImage = new URL('/images/og-image.jpg', siteUrl).toString();
+
+const personLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Lucie Linhartová',
+  jobTitle: 'Certifikovaná transformační koučka',
+  email: `mailto:${EMAIL}`,
+  telephone: TELEFON,
+  areaServed: 'Praha a Středočeský kraj, online',
+};
+
+const businessLd = {
+  '@context': 'https://schema.org',
+  '@type': 'LocalBusiness',
+  name: 'Lucie Linhartová, transformační koučink',
+  image: ogImage,
+  email: EMAIL,
+  telephone: TELEFON,
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Praha',
+    addressCountry: 'CZ',
+  },
+  priceRange: '1900–15000 Kč',
+};
+---
+
+<!doctype html>
+<html lang="cs">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:locale" content="cs_CZ" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <!-- Fonty -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lora:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <script type="application/ld+json" set:html={JSON.stringify(personLd)} />
+    <script type="application/ld+json" set:html={JSON.stringify(businessLd)} />
+
+    <script define:vars={{ META_PIXEL_ID }} is:inline>
+      // ID je jen konstanta, pixel samotný se nenačítá dokud uživatel
+      // neudělí souhlas s cookies — viz CookieLista.astro
+      window.__META_PIXEL_ID = META_PIXEL_ID;
+      window.__loadMetaPixel = function () {
+        if (!window.__META_PIXEL_ID || window.fbq) return;
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window, document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', window.__META_PIXEL_ID);
+        fbq('track', 'PageView');
+      };
+    </script>
+  </head>
+  <body class="bg-podklad text-text">
+    <slot />
+  </body>
+</html>

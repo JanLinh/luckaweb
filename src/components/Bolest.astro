@@ -1,0 +1,48 @@
+---
+import { Image } from 'astro:assets';
+import { CTA_HREF } from '../config';
+import detail2 from '../assets/images/detail-2.png';
+
+const body = [
+  'Neustále říkáte ANO ostatním a tím NE sami sobě.',
+  'Po rodičovské nevíte, jak dál. Kariéra i vaše identita jsou v mlze.',
+  'Baterky na nule, tlak na dokonalost, pocit, že musíte všechno zvládnout sami.',
+  'Mezigenerační spory o výchovu a hranice, které se těžko drží.',
+  'Vnitřní kritik, který nikdy nemlčí.',
+];
+---
+
+<section class="bg-karta px-4 py-16 md:px-8 md:py-24">
+  <div class="mx-auto max-w-3xl text-center">
+    <Image
+      src={detail2}
+      alt="Ruce s hrnkem čaje jako symbol pauzy a péče o sebe"
+      width={400}
+      height={400}
+      format="webp"
+      quality={85}
+      loading="lazy"
+      class="mx-auto mb-6 h-40 w-40 rounded-full object-cover shadow-md md:h-48 md:w-48"
+    />
+    <h2 class="text-4xl md:text-5xl">Dřív jste věděli, kam jdete. Teď máte pocit, že jste ztratili sami sebe.</h2>
+    <p class="prose-p mx-auto mt-5 text-lg md:text-xl">Pokud vám je tohle povědomé, nejste v tom sami, a dá se z toho ven.</p>
+  </div>
+
+  <ul class="mx-auto mt-10 grid max-w-3xl gap-5 md:grid-cols-2">
+    {body.map((polozka) => (
+      <li class="flex items-start gap-3 rounded-2xl bg-bila p-6 shadow-sm">
+        <span class="mt-1.5 shrink-0 text-primarni" aria-hidden="true">●</span>
+        <span class="text-lg font-medium text-text">{polozka}</span>
+      </li>
+    ))}
+  </ul>
+
+  <div class="mx-auto mt-10 max-w-3xl text-center">
+    <p class="mb-5 text-lg font-medium text-primarni-tmava">
+      Je čas dát na první místo vás. Pojďme s tím něco udělat.
+    </p>
+    <a href={CTA_HREF} class="btn-cta">
+      <span aria-hidden="true">☑</span> Rezervovat 1. sezení zdarma
+    </a>
+  </div>
+</section>

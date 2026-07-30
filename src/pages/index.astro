@@ -1,0 +1,32 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
+import Bolest from '../components/Bolest.astro';
+import Pribeh from '../components/Pribeh.astro';
+import Specializace from '../components/Specializace.astro';
+import JakToProbiha from '../components/JakToProbiha.astro';
+import Reference from '../components/Reference.astro';
+import OMne from '../components/OMne.astro';
+import Faq from '../components/Faq.astro';
+import FinalniCta from '../components/FinalniCta.astro';
+import Paticka from '../components/Paticka.astro';
+import StickyCta from '../components/StickyCta.astro';
+import CookieLista from '../components/CookieLista.astro';
+---
+
+<Layout>
+  <Hero />
+  <main class="pb-16 md:pb-0">
+    <Bolest />
+    <Pribeh />
+    <Specializace />
+    <JakToProbiha />
+    <Reference />
+    <OMne />
+    <Faq />
+    <FinalniCta />
+  </main>
+  <Paticka />
+  <StickyCta />
+  <CookieLista />
+</Layout>

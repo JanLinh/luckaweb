@@ -1,0 +1,67 @@
+---
+---
+
+<div
+  id="cookie-lista"
+  class="fixed inset-x-0 bottom-0 z-50 hidden border-t border-linka bg-bila/95 px-4 py-4 shadow-[0_-4px_20px_rgba(0,0,0,0.08)] backdrop-blur md:px-8"
+  role="dialog"
+  aria-live="polite"
+  aria-label="Souhlas s cookies"
+>
+  <div class="mx-auto flex max-w-5xl flex-col items-start gap-3 md:flex-row md:items-center md:justify-between md:gap-6">
+    <p class="text-sm text-text-svetla">
+      Používáme cookies, abychom mohli měřit, jak lidem tato stránka pomáhá. Souhlasíte s jejich používáním?
+      <a href="/ochrana-osobnich-udaju" class="underline decoration-linka underline-offset-2 hover:text-primarni-tmava">Ochrana osobních údajů</a>
+    </p>
+    <div class="flex shrink-0 gap-3">
+      <button
+        id="cookie-odmitnout"
+        type="button"
+        class="rounded-xl border border-linka px-4 py-2 text-sm font-medium text-text-svetla transition-colors hover:bg-karta"
+      >
+        Odmítnout
+      </button>
+      <button
+        id="cookie-prijmout"
+        type="button"
+        class="rounded-xl bg-primarni-tmava px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-primarni"
+      >
+        Přijmout
+      </button>
+    </div>
+  </div>
+</div>
+
+<script is:inline>
+  (function () {
+    var STORAGE_KEY = 'cookie-souhlas';
+    var lista = document.getElementById('cookie-lista');
+    if (!lista) return;
+
+    var ulozeny = null;
+    try {
+      ulozeny = localStorage.getItem(STORAGE_KEY);
+    } catch (e) {}
+
+    if (ulozeny === 'prijato') {
+      if (window.__loadMetaPixel) window.__loadMetaPixel();
+    } else if (!ulozeny) {
+      lista.classList.remove('hidden');
+    }
+
+    document.getElementById('cookie-prijmout').addEventListener('click', function () {
+      try {
+        localStorage.setItem(STORAGE_KEY, 'prijato');
+      } catch (e) {}
+      lista.classList.add('hidden');
+      if (window.__loadMetaPixel) window.__loadMetaPixel();
+    });
+
+    document.getElementById('cookie-odmitnout').addEventListener('click', function () {
+      try {
+        localStorage.setItem(STORAGE_KEY, 'odmitnuto');
+      } catch (e) {}
+      lista.classList.add('hidden');
+    });
+  })();
+</script>

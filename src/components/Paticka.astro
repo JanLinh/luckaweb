@@ -1,0 +1,33 @@
+---
+import { TELEFON, EMAIL, INSTAGRAM_URL, FACEBOOK_URL } from '../config';
+---
+
+<footer class="bg-karta px-4 py-12 md:px-8">
+  <div class="mx-auto flex max-w-5xl flex-col gap-6 border-t border-linka pt-8 text-sm text-text-svetla md:flex-row md:items-start md:justify-between">
+    <div>
+      <p class="font-display text-lg text-primarni-tmava">Lucie Linhartová</p>
+      <p class="mt-1 max-w-xs">Certifikovaná transformační koučka. Bezpečné místo pro váš návrat k sobě.</p>
+    </div>
+
+    <div class="flex flex-col gap-1">
+      <a href={`tel:${TELEFON.replace(/\s+/g, '')}`} class="hover:text-primarni-tmava">{TELEFON}</a>
+      <a href={`mailto:${EMAIL}`} class="hover:text-primarni-tmava">{EMAIL}</a>
+      <div class="mt-2 flex gap-4">
+        {INSTAGRAM_URL && (
+          <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" class="hover:text-primarni-tmava">Instagram</a>
+        )}
+        {FACEBOOK_URL && (
+          <a href={FACEBOOK_URL} target="_blank" rel="noopener noreferrer" class="hover:text-primarni-tmava">Facebook</a>
+        )}
+      </div>
+    </div>
+
+    <div>
+      <a href="/ochrana-osobnich-udaju" class="hover:text-primarni-tmava">Ochrana osobních údajů</a>
+    </div>
+  </div>
+
+  <p class="mx-auto mt-8 max-w-5xl text-xs text-text-svetla/80">
+    © 2026 Lucie Linhartová · Certifikovaná transformační koučka
+  </p>
+</footer>
