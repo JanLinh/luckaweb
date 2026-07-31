@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import { META_PIXEL_ID, TELEFON, EMAIL } from '../config';
+import Analytics from '@vercel/analytics/astro';
 
 interface Props {
   title?: string;
@@ -75,6 +76,8 @@ const businessLd = {
 
     <script type="application/ld+json" set:html={JSON.stringify(personLd)} />
     <script type="application/ld+json" set:html={JSON.stringify(businessLd)} />
+
+    <Analytics />
 
     <script define:vars={{ META_PIXEL_ID }} is:inline>
       // ID je jen konstanta, pixel samotný se nenačítá dokud uživatel
