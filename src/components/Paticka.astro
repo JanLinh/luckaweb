@@ -1,5 +1,7 @@
 ---
+import { Image } from 'astro:assets';
 import { TELEFON, EMAIL, INSTAGRAM_URL, FACEBOOK_URL } from '../config';
+import certifikat from '../assets/images/certifikat.webp';
 ---
 
 <footer class="bg-karta px-4 py-12 md:px-8">
@@ -8,6 +10,20 @@ import { TELEFON, EMAIL, INSTAGRAM_URL, FACEBOOK_URL } from '../config';
       <p class="font-display text-lg text-primarni-tmava">Lucie Linhartová</p>
       <p class="mt-1 max-w-xs">Certifikovaná transformační koučka. Bezpečné místo pro váš návrat k sobě.</p>
     </div>
+
+    <a href={certifikat.src} target="_blank" rel="noopener noreferrer" class="block w-fit shrink-0">
+      <Image
+        src={certifikat}
+        alt="Certifikát Transformační kouč, Radek Karban Coaching University"
+        width={220}
+        height={155}
+        format="webp"
+        quality={80}
+        loading="lazy"
+        class="rounded-lg border border-linka shadow-sm transition-opacity hover:opacity-80"
+      />
+      <span class="mt-1 block text-xs text-text-svetla/80">Certifikát Transformační kouč</span>
+    </a>
 
     <div class="flex flex-col gap-1">
       <a href={`tel:${TELEFON.replace(/\s+/g, '')}`} class="hover:text-primarni-tmava">{TELEFON}</a>
