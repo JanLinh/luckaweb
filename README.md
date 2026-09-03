@@ -2,7 +2,7 @@
 
 Jednostránkový web (Astro + Tailwind CSS v4) pro certifikovanou transformační
 koučku Lucii Linhartovou. Cíl stránky: přivést návštěvníka z Meta reklam
-k rezervaci úvodního sezení zdarma.
+k rezervaci úvodního sezení zdarma přes vložený Calendly kalendář.
 
 ## Spuštění lokálně
 
@@ -20,61 +20,47 @@ npm run build
 npm run preview   # ověření produkčního buildu lokálně
 ```
 
-`npm run build` vygeneruje statický web do `./dist/`. Ten stačí nasadit na
-**Vercel** nebo **Netlify** (stačí propojit repo — build command `npm run build`,
-output adresář `dist`, framework preset "Astro"). Žádný server ani databáze
-nejsou potřeba.
+`npm run build` vygeneruje statický web do `./dist/`. Web je nasazený na
+**Vercel**, napojený na GitHub repo — každý push do `main` se automaticky
+nasadí na produkci.
 
-## Co je potřeba doplnit před spuštěním kampaní
-
-Vše je centralizované v [`src/config.ts`](src/config.ts):
+## Co je potřeba doplnit v `src/config.ts`
 
 | Proměnná | Co doplnit |
 | --- | --- |
-| `FORMULAR_ENDPOINT` | Endpoint kontaktního formuláře. Založ formulář na [Formspree](https://formspree.io) (cíl e-mail `coaching@luckalinhartova.cz`) nebo [Web3Forms](https://web3forms.com) a vlož vygenerovaný endpoint/URL. Dokud je prázdný, formulář zobrazí varování a neodešle se. |
-| `META_PIXEL_ID` | ID Meta Pixelu z Events Manageru. Pixel se načte v [`src/layouts/Layout.astro`](src/layouts/Layout.astro), ale skutečně se spustí až po odsouhlasení cookies (viz [`src/components/CookieLista.astro`](src/components/CookieLista.astro)). Událost `Lead` se odesílá po úspěšném odeslání kontaktního formuláře ([`src/components/FinalniCta.astro`](src/components/FinalniCta.astro)). |
-| `REZERVACNI_URL` | Až bude hotový rezervační kalendář (např. Calendly), vlož sem jeho URL — všechna CTA tlačítka na webu na něj automaticky přesměrují místo na formulář. Do té doby zůstává formulář jako záložní cesta. |
+| `META_PIXEL_ID` | ID Meta Pixelu z Events Manageru. Pixel se načte v [`src/layouts/Layout.astro`](src/layouts/Layout.astro), ale skutečně se spustí až po odsouhlasení cookies (viz [`src/components/CookieLista.astro`](src/components/CookieLista.astro)). Událost `Lead` se odesílá po úspěšné rezervaci přes Calendly ([`src/components/FinalniCta.astro`](src/components/FinalniCta.astro)). |
+| `CALENDLY_URL` | Už vyplněné — rezervační kalendář vložený přímo do sekce `#kontakt` jako inline widget. |
+| `REZERVACNI_URL` | Volitelné. Pokud by ses chtěl/a vrátit k tomu, že CTA tlačítka vedou rovnou na externí Calendly stránku místo na `#kontakt`, vlož sem tu URL. |
 | `INSTAGRAM_URL` / `FACEBOOK_URL` | Volitelné odkazy na sociální sítě v patičce. |
-| `TELEFON` / `EMAIL` | Už vyplněné, uprav podle potřeby. |
+| `TELEFON` / `EMAIL` | Kontaktní údaje v patičce a v sekci `#kontakt` (záložní cesta, když si návštěvník nevybere termín v kalendáři). |
 
 ## Fotky
 
-Skutečné fotky zatím **nejsou** v projektu — do `public/images/` jsem
-vygeneroval jednoduché barevné placeholdery (stejné rozměry, aby layout
-seděl), aby web šel hned prohlédnout. Nahraď je reálnými fotkami se
-**stejnými názvy souborů**:
-
-| Soubor | Kde se použije | Doporučený formát |
-| --- | --- | --- |
-| `hero-portret.jpg` | Hero sekce (portrét na výšku, 4:5) | JPG/WebP |
-| `o-mne.jpg` | Sekce „O mně" (čtvercový portrét) | JPG/WebP |
-| `pribeh-priroda.jpg` | Sekce „Prošla jsem si tím taky" (lesní cesta) | JPG/WebP |
-| `detail-1.jpg`, `detail-2.jpg` | Zatím nepoužité v layoutu — připravené pro budoucí mezisekce/detaily | JPG/WebP |
-| `og-image.jpg` | Open Graph obrázek (1200×630) v `<head>` | JPG |
-
-Fotky nech tonálně beze změny (jsou už barevně sladěné), ulož jako optimalizovaný
-JPG nebo WebP. Placeholdery můžeš znovu vygenerovat příkazem
-`python scripts/gen_placeholders.py`, pokud je potřeba layout znovu zkontrolovat
-bez reálných fotek.
+Reálné fotky jsou v `src/assets/images/` a procházejí Astro image pipeline
+(automatický WebP + responzivní srcset, viz komponenty `Hero`, `Pribeh`,
+`OMne`, `Bolest`, `JakToProbiha`). `og-image.jpg` zůstává jako statický
+soubor v `public/images/`, protože se na něj odkazuje přímo v `<head>`.
 
 ## Struktura projektu
 
 ```
 src/
-├── components/   # Hero, Bolest, Pribeh, Specializace, JakToProbiha,
-│                 # Reference, OMne, Faq, FinalniCta, Paticka, StickyCta, CookieLista
+├── assets/images/   # reálné fotky (procházejí Astro image pipeline)
+├── components/      # Hero, Bolest, Pribeh, Specializace, JakToProbiha,
+│                     # Reference, OMne, Faq, FinalniCta, Paticka, StickyCta, CookieLista
 ├── layouts/
 │   └── Layout.astro   # <head>, fonty, Meta Pixel, SEO, structured data
 ├── pages/
 │   ├── index.astro
 │   └── ochrana-osobnich-udaju.astro
-└── config.ts     # všechny placeholdery/proměnné na jednom místě
+└── config.ts     # všechny proměnné (Pixel, Calendly, kontakty) na jednom místě
 public/
-└── images/       # fotky (viz výše)
+└── images/       # og-image.jpg (statický, mimo Astro pipeline)
 ```
 
 ## Poznámky
 
-- Formulář má honeypot pole proti spamu a validaci povinných polí na frontendu.
+- Sekce `#kontakt` obsahuje Calendly inline widget jako hlavní způsob rezervace,
+  pod ním je záložní odkaz na e-mail pro ty, kdo si nevyberou termín.
 - Cookie lišta blokuje načtení Meta Pixelu, dokud uživatel neklikne „Přijmout".
 - Všechna CTA tlačítka vedou na `#kontakt` (nebo na `REZERVACNI_URL`, pokud je vyplněná).
