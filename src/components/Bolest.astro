@@ -31,8 +31,13 @@ const body = [
   </div>
 
   <ul class="mx-auto mt-10 grid max-w-3xl gap-5 md:grid-cols-2">
-    {body.map((polozka) => (
-      <li class="flex items-start gap-3 rounded-2xl bg-bila p-6 shadow-sm">
+    {body.map((polozka, i) => (
+      <li
+        class:list={[
+          'flex items-start gap-3 rounded-2xl bg-bila p-6 shadow-sm',
+          i === body.length - 1 && 'md:col-span-2 md:mx-auto md:w-[calc(50%-0.625rem)]',
+        ]}
+      >
         <span class="mt-1.5 shrink-0 text-primarni" aria-hidden="true">●</span>
         <span class="text-lg font-medium text-text">{polozka}</span>
       </li>
