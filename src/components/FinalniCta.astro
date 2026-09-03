@@ -1,16 +1,29 @@
 ---
-import { FORMULAR_ENDPOINT } from '../config';
+import { FORMULAR_ENDPOINT, CALENDLY_URL } from '../config';
 ---
 
 <section id="kontakt" class="bg-primarni-tmava px-4 py-16 text-white md:px-8 md:py-24">
   <div class="mx-auto max-w-2xl text-center">
     <h2 class="text-3xl text-white md:text-4xl">Udělejte ten první krok pro sebe ještě dnes</h2>
     <p class="mt-4 text-base text-white/85 md:text-lg">
-      Nebuďte na to sami. Napište mi a domluvíme si 1. sezení, zdarma a nezávazně. Ozvu se vám co nejdřív.
+      Nebuďte na to sami. Vyberte si termín úvodního sezení, zdarma a nezávazně.
     </p>
   </div>
 
+  {CALENDLY_URL && (
+    <div class="mx-auto mt-10 max-w-xl overflow-hidden rounded-2xl bg-podklad shadow-lg">
+      <div
+        class="calendly-inline-widget"
+        data-url={`${CALENDLY_URL}?primary_color=74be90`}
+        style="min-width:320px;height:700px;"
+      >
+      </div>
+    </div>
+  )}
+
   <div class="mx-auto mt-10 max-w-xl rounded-2xl bg-podklad p-6 shadow-lg md:p-8">
+    <p class="mb-5 text-center text-sm font-medium text-text-svetla">Nebo mi rovnou napište:</p>
+
     {!FORMULAR_ENDPOINT && (
       <p class="mb-4 rounded-xl bg-akcent/10 p-3 text-sm text-akcent-tmava">
         Formulář zatím není napojený na žádnou službu. Doplň <code>FORMULAR_ENDPOINT</code> v <code>src/config.ts</code>.
@@ -86,7 +99,7 @@ import { FORMULAR_ENDPOINT } from '../config';
       <p id="formular-chyba" class="hidden text-sm font-medium text-red-600" role="alert"></p>
 
       <button type="submit" class="btn-cta w-full">
-        Odeslat a domluvit 1. sezení zdarma
+        Odeslat a domluvit úvodní sezení zdarma
       </button>
     </form>
 
@@ -95,6 +108,17 @@ import { FORMULAR_ENDPOINT } from '../config';
     </p>
   </div>
 </section>
+
+{CALENDLY_URL && <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async is:inline></script>}
+
+<script is:inline>
+  // Meta Pixel Lead event po úspěšné rezervaci přes Calendly
+  window.addEventListener('message', function (e) {
+    if (e.data && e.data.event === 'calendly.event_scheduled') {
+      if (window.fbq) window.fbq('track', 'Lead');
+    }
+  });
+</script>
 
 <script is:inline>
   (function () {
@@ -155,7 +179,7 @@ import { FORMULAR_ENDPOINT } from '../config';
           chybaEl.textContent = 'Něco se nepovedlo. Zkuste to prosím znovu, nebo napište přímo na e-mail v patičce.';
           chybaEl.classList.remove('hidden');
           submitBtn.disabled = false;
-          submitBtn.textContent = 'Odeslat a domluvit 1. sezení zdarma';
+          submitBtn.textContent = 'Odeslat a domluvit úvodní sezení zdarma';
         });
     });
   })();

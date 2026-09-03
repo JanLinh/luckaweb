@@ -2,7 +2,7 @@
 
 Jednostránkový web (Astro + Tailwind CSS v4) pro certifikovanou transformační
 koučku Lucii Linhartovou. Cíl stránky: přivést návštěvníka z Meta reklam
-k rezervaci 1. sezení zdarma.
+k rezervaci úvodního sezení zdarma.
 
 ## Spuštění lokálně
 
@@ -31,7 +31,7 @@ Vše je centralizované v [`src/config.ts`](src/config.ts):
 
 | Proměnná | Co doplnit |
 | --- | --- |
-| `FORMULAR_ENDPOINT` | Endpoint kontaktního formuláře. Založ formulář na [Formspree](https://formspree.io) (cíl e-mail `lucka.linhartova@post.cz`) nebo [Web3Forms](https://web3forms.com) a vlož vygenerovaný endpoint/URL. Dokud je prázdný, formulář zobrazí varování a neodešle se. |
+| `FORMULAR_ENDPOINT` | Endpoint kontaktního formuláře. Založ formulář na [Formspree](https://formspree.io) (cíl e-mail `coaching@luckalinhartova.cz`) nebo [Web3Forms](https://web3forms.com) a vlož vygenerovaný endpoint/URL. Dokud je prázdný, formulář zobrazí varování a neodešle se. |
 | `META_PIXEL_ID` | ID Meta Pixelu z Events Manageru. Pixel se načte v [`src/layouts/Layout.astro`](src/layouts/Layout.astro), ale skutečně se spustí až po odsouhlasení cookies (viz [`src/components/CookieLista.astro`](src/components/CookieLista.astro)). Událost `Lead` se odesílá po úspěšném odeslání kontaktního formuláře ([`src/components/FinalniCta.astro`](src/components/FinalniCta.astro)). |
 | `REZERVACNI_URL` | Až bude hotový rezervační kalendář (např. Calendly), vlož sem jeho URL — všechna CTA tlačítka na webu na něj automaticky přesměrují místo na formulář. Do té doby zůstává formulář jako záložní cesta. |
 | `INSTAGRAM_URL` / `FACEBOOK_URL` | Volitelné odkazy na sociální sítě v patičce. |

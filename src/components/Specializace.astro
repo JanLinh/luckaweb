@@ -2,14 +2,53 @@
 import { CTA_HREF } from '../config';
 
 const oblasti = [
-  { cislo: '01', nazev: 'Rodinné a pracovní vztahy', vysledek: 'Pevné hranice bez pocitů viny.' },
-  { cislo: '02', nazev: 'Strachy, obavy a úzkosti', vysledek: 'Proměňte strach ze selhání v sílu.' },
-  { cislo: '03', nazev: 'Kariéra a uplatnění', vysledek: 'Restart po rodičovské a nová cesta, která dává smysl.' },
-  { cislo: '04', nazev: 'Naplnění a smysl', vysledek: 'Najděte směr, kdo jste, když zrovna nepečujete o druhé.' },
-  { cislo: '05', nazev: 'Emoce a psychická stabilita', vysledek: 'Reagujte s klidem, ne v emocích.' },
-  { cislo: '06', nazev: 'Zdraví, únava a energie', vysledek: 'Stopka pro vyhoření a návrat energie.' },
-  { cislo: '07', nazev: 'Priority a cíle', vysledek: 'Ukliďte chaos v hlavě a vraťte se ke svým snům.' },
-  { cislo: '08', nazev: 'Vztah k sobě a sebedůvěra', vysledek: 'Utište vnitřního kritika a vraťte se ke svým potřebám.' },
+  {
+    cislo: '01',
+    nazev: 'Rodinné a pracovní vztahy',
+    vysledek:
+      'Pevné hranice bez pocitů viny. Komu všemu říkáte „ano“, i když uvnitř cítíte jasné „ne“? Naučte se říkat laskavé, ale nekompromisní „ne“ požadavkům okolí a nastavte si zdravá pravidla doma i v práci.',
+  },
+  {
+    cislo: '02',
+    nazev: 'Kariéra, nový směr a uplatnění',
+    vysledek:
+      'Restart po rodičovské. Kým chcete profesně být? Kde se držíte zbytečně zpátky? Najdeme uplatnění nebo vlastní projekt, který bude v souladu s vaší rodinou.',
+  },
+  {
+    cislo: '03',
+    nazev: 'Emoce a psychická stabilita',
+    vysledek:
+      'Zvládání vlastních emocí i dětského vzteku. Co vás dokáže nejvíc vytočit a jak reagujete pod tlakem? Naučte se včas zastavit a reagovat s klidem, ne v afektu.',
+  },
+  {
+    cislo: '04',
+    nazev: 'Vztah k sobě a sebedůvěra',
+    vysledek:
+      'Konec pochybností a utišení vnitřního kritika. Máte se opravdu rádi? Kdy začnete myslet i na sebe? Objevte znovu svou vlastní hodnotu a sebevědomí.',
+  },
+  {
+    cislo: '05',
+    nazev: 'Zdraví, stopka vyhoření a návrat energie',
+    vysledek:
+      'Zastavte chronické vyčerpání. Kolik energie vám večer zbývá pro sebe? Získejte praktické návyky pro dobití baterek a začněte žít, ne jen přežívat ze dne na den.',
+  },
+  {
+    cislo: '06',
+    nazev: 'Priority, sny a úklid v hlavě',
+    vysledek:
+      'Konec uštvání a chaosu. Který sen odkládáte na neurčito? Pojďme si na to posvítit a ukliďte si v prioritách s lehkostí.',
+  },
+  {
+    cislo: '07',
+    nazev: 'Strachy, obavy a úzkosti',
+    vysledek:
+      'Proměňte strach ze selhání v sílu. Co nejhoršího se může stát, když to zkusíte, a co vás drží zpátky? Překonejte obavy z budoucnosti a vykročte s jistotou do nových životních výzev.',
+  },
+  {
+    cislo: '08',
+    nazev: 'Naplnění a životní smysl',
+    vysledek: 'Kdo jste, když zrovna nepečujete o druhé? Najděte radost a směr pro svou další životní etapu.',
+  },
 ];
 ---
 
@@ -18,7 +57,7 @@ const oblasti = [
     <h2 class="text-3xl md:text-4xl">Oblasti, ve kterých vás provedu</h2>
   </div>
 
-  <div class="mx-auto mt-10 grid max-w-6xl gap-5 sm:grid-cols-2 lg:grid-cols-4">
+  <div class="mx-auto mt-10 grid max-w-5xl gap-5 lg:grid-cols-2">
     {oblasti.map((o) => (
       <div class="rounded-2xl bg-bila p-6 shadow-sm">
         <span class="font-display text-2xl text-linka">{o.cislo}</span>
@@ -30,10 +69,10 @@ const oblasti = [
 
   <div class="mx-auto mt-10 max-w-2xl text-center">
     <p class="mb-5 text-lg font-medium text-primarni-tmava">
-      Vidíte se v něčem z toho? Pojďme si domluvit 1. sezení, nezávazně a zdarma.
+      Vidíte se v něčem z toho? Pojďme si domluvit úvodní sezení, nezávazně a zdarma.
     </p>
     <a href={CTA_HREF} class="btn-cta">
-      <span aria-hidden="true">☑</span> Rezervovat 1. sezení zdarma
+      <span aria-hidden="true">☑</span> Rezervovat úvodní sezení zdarma
     </a>
   </div>
 </section>
