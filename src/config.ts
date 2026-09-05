@@ -3,7 +3,7 @@
 // ============================================================
 
 // Meta Pixel ID — najdeš v Events Manageru na business.facebook.com
-export const META_PIXEL_ID = "";
+export const META_PIXEL_ID = "1087829293700603";
 
 // Rezervační URL (externí, např. přímý odkaz na Calendly). Pokud je vyplněná,
 // všechna CTA tlačítka na webu na ni přesměrují místo na sekci #kontakt.
