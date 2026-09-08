@@ -10,8 +10,8 @@ export const META_PIXEL_ID = "1087829293700603";
 // Necháváme prázdné — Calendly je zakomponované přímo do stránky, viz CALENDLY_URL níže.
 export const REZERVACNI_URL = "";
 
-// Calendly rezervační kalendář vložený přímo do sekce #kontakt (inline widget).
-export const CALENDLY_URL = "https://calendly.com/coaching-luckalinhartova/30min";
+// Calendly rezervační kalendář — CTA tlačítko v sekci #kontakt na něj odkazuje.
+export const CALENDLY_URL = "https://calendly.com/coaching-luckalinhartova/60min";
 
 export const TELEFON = "+420 777 702 219";
 export const EMAIL = "coaching@luckalinhartova.cz";
