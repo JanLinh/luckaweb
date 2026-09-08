@@ -1,0 +1,39 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Paticka from '../components/Paticka.astro';
+---
+
+<Layout
+  title="Děkujeme za rezervaci | Lucie Linhartová"
+  description="Vaše úvodní sezení je rezervované. Brzy se vám ozvu."
+  noindex={true}
+>
+  <main class="mx-auto flex min-h-[60vh] max-w-2xl flex-col items-center justify-center px-4 py-16 text-center md:px-8 md:py-24">
+    <span class="text-5xl" aria-hidden="true">🌿</span>
+    <h1 class="mt-4 text-3xl md:text-4xl">Děkuji, rezervace je potvrzená</h1>
+    <p class="prose-p mx-auto mt-5">
+      Termín úvodního sezení máte v kalendáři a potvrzení dorazí i na váš e-mail. Těším se, až se
+      poznáme. Kdybyste mezitím potřebovali cokoliv upřesnit, napište mi klidně přímo.
+    </p>
+    <a href="/" class="mt-8 text-sm font-medium text-primarni-tmava underline decoration-linka underline-offset-4 hover:decoration-primarni-tmava">
+      ← Zpět na hlavní stránku
+    </a>
+  </main>
+  <Paticka />
+</Layout>
+
+<script is:inline>
+  (function () {
+    var pokusy = 0;
+    var interval = setInterval(function () {
+      pokusy++;
+      if (window.fbq) {
+        window.fbq('track', 'Lead');
+        clearInterval(interval);
+      } else if (pokusy > 20) {
+        // Pixel se nenačetl (např. odmítnuté cookies) — vzdáváme se po ~4s.
+        clearInterval(interval);
+      }
+    }, 200);
+  })();
+</script>

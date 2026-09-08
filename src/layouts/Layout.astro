@@ -1,15 +1,18 @@
 ---
 import '../styles/global.css';
 import { META_PIXEL_ID, TELEFON, EMAIL } from '../config';
+import CookieLista from '../components/CookieLista.astro';
 
 interface Props {
   title?: string;
   description?: string;
+  noindex?: boolean;
 }
 
 const {
   title = 'Lucie Linhartová | Transformační koučka Praha | Úvodní sezení zdarma',
   description = 'Provázím unavené rodiče na kariérní křižovatce. Najděte znovu energii, hranice a směr. Úvodní sezení zdarma a nezávazně, online i osobně v Praze.',
+  noindex = false,
 } = Astro.props;
 
 const siteUrl = Astro.site?.toString() ?? 'https://luckalinhartova.cz';
@@ -48,6 +51,7 @@ const businessLd = {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
 
     <title>{title}</title>
     <meta name="description" content={description} />
@@ -97,5 +101,6 @@ const businessLd = {
   </head>
   <body class="bg-podklad text-text">
     <slot />
+    <CookieLista />
   </body>
 </html>
