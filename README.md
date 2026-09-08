@@ -2,7 +2,7 @@
 
 Jednostránkový web (Astro + Tailwind CSS v4) pro certifikovanou transformační
 koučku Lucii Linhartovou. Cíl stránky: přivést návštěvníka z Meta reklam
-k rezervaci úvodního sezení zdarma přes vložený Calendly kalendář.
+k rezervaci úvodního sezení zdarma přes odkaz na Calendly.
 
 ## Spuštění lokálně
 
@@ -28,8 +28,8 @@ nasadí na produkci.
 
 | Proměnná | Co doplnit |
 | --- | --- |
-| `META_PIXEL_ID` | ID Meta Pixelu z Events Manageru. Pixel se načte v [`src/layouts/Layout.astro`](src/layouts/Layout.astro), ale skutečně se spustí až po odsouhlasení cookies (viz [`src/components/CookieLista.astro`](src/components/CookieLista.astro)). Událost `Lead` se odesílá po úspěšné rezervaci přes Calendly ([`src/components/FinalniCta.astro`](src/components/FinalniCta.astro)). |
-| `CALENDLY_URL` | Už vyplněné — rezervační kalendář vložený přímo do sekce `#kontakt` jako inline widget. |
+| `META_PIXEL_ID` | ID Meta Pixelu z Events Manageru. Pixel se načte v [`src/layouts/Layout.astro`](src/layouts/Layout.astro), ale skutečně se spustí až po odsouhlasení cookies (viz [`src/components/CookieLista.astro`](src/components/CookieLista.astro)). |
+| `CALENDLY_URL` | Už vyplněné — v sekci `#kontakt` je na ni odkaz přes CTA tlačítko „Rezervovat bezplatnou konzultaci" (otevírá se v novém tabu). |
 | `REZERVACNI_URL` | Volitelné. Pokud by ses chtěl/a vrátit k tomu, že CTA tlačítka vedou rovnou na externí Calendly stránku místo na `#kontakt`, vlož sem tu URL. |
 | `INSTAGRAM_URL` / `FACEBOOK_URL` | Volitelné odkazy na sociální sítě v patičce. |
 | `TELEFON` / `EMAIL` | Kontaktní údaje v patičce a v sekci `#kontakt` (záložní cesta, když si návštěvník nevybere termín v kalendáři). |
@@ -60,7 +60,11 @@ public/
 
 ## Poznámky
 
-- Sekce `#kontakt` obsahuje Calendly inline widget jako hlavní způsob rezervace,
-  pod ním je záložní odkaz na e-mail pro ty, kdo si nevyberou termín.
+- Sekce `#kontakt` obsahuje CTA tlačítko na Calendly (otevírá se v novém tabu)
+  jako hlavní způsob rezervace, pod ním je záložní odkaz na e-mail.
+- Meta Pixel eviduje `PageView`; přímé sledování rezervace (`Lead`) přes
+  postMessage z Calendly embedu odpadlo spolu s widgetem — pokud budeš chtít
+  sledovat konverze z Calendly, řeš to přes Calendly webhook/Zapier nebo
+  přesměrování na děkovací stránku s vlastním `Lead` eventem.
 - Cookie lišta blokuje načtení Meta Pixelu, dokud uživatel neklikne „Přijmout".
 - Všechna CTA tlačítka vedou na `#kontakt` (nebo na `REZERVACNI_URL`, pokud je vyplněná).

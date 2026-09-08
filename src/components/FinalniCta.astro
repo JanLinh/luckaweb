@@ -11,13 +11,13 @@ import { CALENDLY_URL, EMAIL } from '../config';
   </div>
 
   {CALENDLY_URL && (
-    <div class="mx-auto mt-10 max-w-xl overflow-hidden rounded-2xl bg-podklad shadow-lg">
-      <div
-        class="calendly-inline-widget"
-        data-url={`${CALENDLY_URL}?primary_color=74be90`}
-        style="min-width:320px;height:700px;"
-      >
-      </div>
+    <div class="mx-auto mt-10 max-w-xl text-center">
+      <p class="mb-6 text-base text-white/85 md:text-lg">
+        Pojďme to společně probrat. Vyberte si termín pro bezplatnou 30minutovou konzultaci.
+      </p>
+      <a href={CALENDLY_URL} target="_blank" rel="noopener noreferrer" class="btn-cta">
+        <span aria-hidden="true">☑</span> Rezervovat bezplatnou konzultaci
+      </a>
     </div>
   )}
 
@@ -27,14 +27,3 @@ import { CALENDLY_URL, EMAIL } from '../config';
     <a href={`mailto:${EMAIL}`} class="font-semibold underline decoration-white/50 underline-offset-2 hover:decoration-white">{EMAIL}</a>.
   </p>
 </section>
-
-{CALENDLY_URL && <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async is:inline></script>}
-
-<script is:inline>
-  // Meta Pixel Lead event po úspěšné rezervaci přes Calendly
-  window.addEventListener('message', function (e) {
-    if (e.data && e.data.event === 'calendly.event_scheduled') {
-      if (window.fbq) window.fbq('track', 'Lead');
-    }
-  });
-</script>
