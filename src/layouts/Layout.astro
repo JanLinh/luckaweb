@@ -1,6 +1,6 @@
 ---
 import '../styles/global.css';
-import { META_PIXEL_ID, TELEFON, EMAIL } from '../config';
+import { META_PIXEL_ID, CLARITY_ID, TELEFON, EMAIL } from '../config';
 import CookieLista from '../components/CookieLista.astro';
 
 interface Props {
@@ -80,8 +80,8 @@ const businessLd = {
     <script type="application/ld+json" set:html={JSON.stringify(personLd)} />
     <script type="application/ld+json" set:html={JSON.stringify(businessLd)} />
 
-    <script define:vars={{ META_PIXEL_ID }} is:inline>
-      // ID je jen konstanta, pixel samotný se nenačítá dokud uživatel
+    <script define:vars={{ META_PIXEL_ID, CLARITY_ID }} is:inline>
+      // ID jsou jen konstanty, samotné skripty se nenačítají dokud uživatel
       // neudělí souhlas s cookies — viz CookieLista.astro
       window.__META_PIXEL_ID = META_PIXEL_ID;
       window.__loadMetaPixel = function () {
@@ -96,6 +96,16 @@ const businessLd = {
         'https://connect.facebook.net/en_US/fbevents.js');
         fbq('init', window.__META_PIXEL_ID);
         fbq('track', 'PageView');
+      };
+
+      window.__CLARITY_ID = CLARITY_ID;
+      window.__loadClarity = function () {
+        if (!window.__CLARITY_ID || window.clarity) return;
+        (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", window.__CLARITY_ID);
       };
     </script>
   </head>

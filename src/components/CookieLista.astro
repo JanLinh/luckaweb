@@ -45,6 +45,7 @@
 
     if (ulozeny === 'prijato') {
       if (window.__loadMetaPixel) window.__loadMetaPixel();
+      if (window.__loadClarity) window.__loadClarity();
     } else if (!ulozeny) {
       lista.classList.remove('hidden');
     }
@@ -55,6 +56,7 @@
       } catch (e) {}
       lista.classList.add('hidden');
       if (window.__loadMetaPixel) window.__loadMetaPixel();
+      if (window.__loadClarity) window.__loadClarity();
     });
 
     document.getElementById('cookie-odmitnout').addEventListener('click', function () {

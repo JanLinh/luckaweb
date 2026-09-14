@@ -5,6 +5,9 @@
 // Meta Pixel ID — najdeš v Events Manageru na business.facebook.com
 export const META_PIXEL_ID = "1087829293700603";
 
+// Microsoft Clarity project ID — najdeš na clarity.microsoft.com
+export const CLARITY_ID = "yi5vsevy1u";
+
 // Rezervační URL (externí, např. přímý odkaz na Calendly). Pokud je vyplněná,
 // všechna CTA tlačítka na webu na ni přesměrují místo na sekci #kontakt.
 // Necháváme prázdné — Calendly je zakomponované přímo do stránky, viz CALENDLY_URL níže.
