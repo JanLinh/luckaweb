@@ -1,6 +1,6 @@
 ---
 import { Image } from 'astro:assets';
-import { CTA_HREF } from '../config';
+import { CALENDLY_URL, CTA_HREF } from '../config';
 import lucieHero from '../assets/images/lucie-hero.jpg';
 ---
 
@@ -8,7 +8,12 @@ import lucieHero from '../assets/images/lucie-hero.jpg';
 <nav class="sticky top-0 z-30 border-b border-linka/60 bg-podklad/80 backdrop-blur">
   <div class="mx-auto flex max-w-6xl items-center justify-between px-4 py-4 md:px-8">
     <span class="font-display text-lg text-primarni-tmava">Lucie Linhartová</span>
-    <a href={CTA_HREF} class="hidden rounded-xl bg-akcent px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-akcent-tmava md:inline-flex">
+    <a
+      href={CALENDLY_URL || CTA_HREF}
+      target={CALENDLY_URL ? '_blank' : undefined}
+      rel={CALENDLY_URL ? 'noopener noreferrer' : undefined}
+      class="hidden rounded-xl bg-akcent px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-akcent-tmava md:inline-flex"
+    >
       Rezervovat sezení
     </a>
   </div>
